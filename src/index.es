@@ -12,13 +12,23 @@ const SRC_ASSETS_DIR = 'src/main/resources/assets';
 const DST_ASSETS_DIR = 'build/resources/main/assets';
 
 
+const UX_PATH_SEP = '/';
+
+
 export function toEntryKey(relativePath) {
-  return relativePath.replace(`${SRC_ASSETS_DIR}/`, '').replace(/\.[^.]*$/, '');
+  return relativePath
+    .replace(/\\/g, UX_PATH_SEP) // Make all path seps ux to match SRC_ASSETS_DIR
+    .replace(`${SRC_ASSETS_DIR}${path.sep}`, '')
+    .replace(/\.[^.]*$/, '');
 }
 
 
 export function toEntryValue(relativePath) {
-  return `.${relativePath.replace(SRC_ASSETS_DIR, '')}`;
+  return `.${path.normalize(
+    relativePath
+      .replace(/\\/g, UX_PATH_SEP) // Make all path seps ux to match SRC_ASSETS_DIR
+      .replace(SRC_ASSETS_DIR, '')
+  )}`;
 }
 
 
