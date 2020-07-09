@@ -11,6 +11,17 @@ const dict = arr => Object.assign(...arr.map(([k, v]) => ({ [k]: v })));
 const SRC_ASSETS_DIR = 'src/main/resources/assets';
 const DST_ASSETS_DIR = 'build/resources/main/assets';
 
+
+export function toEntryKey(relativePath) {
+  return relativePath.replace(`${SRC_ASSETS_DIR}/`, '').replace(/\.[^.]*$/, '');
+}
+
+
+export function toEntryValue(relativePath) {
+  return `.${relativePath.replace(SRC_ASSETS_DIR, '')}`;
+}
+
+
 export function webpackEsmAssets(params) {
   const { __dirname } = params;
   if (!__dirname) {
@@ -25,8 +36,8 @@ export function webpackEsmAssets(params) {
     devtool = false,
     entry = dict(
       assetFiles.map(k => [
-        k.replace(`${SRC_ASSETS_DIR}/`, '').replace(/\.[^.]*$/, ''), // name
-        `.${k.replace(SRC_ASSETS_DIR, '')}` // source relative to context
+        toEntryKey(k), // name
+        toEntryValue(k) // source relative to context
       ])
     ),
     externals,
