@@ -9,10 +9,18 @@ const TEST_PATH = 'src/main/resources/assets/js/react/Collector.jsx';
 
 
 test('entryKey', t => {
-  t.is('js/react/Collector',toEntryKey(TEST_PATH));
+  const expected = 'js/react/Collector';
+  const actual = toEntryKey(TEST_PATH);
+  console.debug('expected:', expected);
+  console.debug('  actual:', actual);
+  t.is(expected, actual);
 });
 
 
 test('entryValue', t => {
-  t.is('./js/react/Collector.jsx',toEntryValue(TEST_PATH));
+  const expected = './js/react/Collector.jsx';
+  const actual = toEntryValue(TEST_PATH);
+  console.debug('expected:', expected);
+  console.debug('  actual:', actual);
+  t.is(expected, actual);
 });
