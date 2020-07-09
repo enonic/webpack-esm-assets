@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 
 import glob from 'glob';
-import path from 'path';
+import path, { relative } from 'path';
 import EsmWebpackPlugin from '@purtuga/esm-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+//import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const dict = arr => Object.assign(...arr.map(([k, v]) => ({ [k]: v })));
 // const toStr = v => JSON.stringify(v, null, 4);
@@ -16,19 +16,14 @@ const UX_PATH_SEP = '/';
 
 
 export function toEntryKey(relativePath) {
-  return relativePath
-    .replace(/\\/g, UX_PATH_SEP) // Make all path seps ux to match SRC_ASSETS_DIR
-    .replace(`${SRC_ASSETS_DIR}${path.sep}`, '')
-    .replace(/\.[^.]*$/, '');
+  let ext = path.extname(relativePath);
+  let fin = path.relative(SRC_ASSETS_DIR, relativePath);
+  return fin.replace(ext, '');
 }
 
-
 export function toEntryValue(relativePath) {
-  return `.${path.normalize(
-    relativePath
-      .replace(/\\/g, UX_PATH_SEP) // Make all path seps ux to match SRC_ASSETS_DIR
-      .replace(SRC_ASSETS_DIR, '')
-  )}`;
+  let fin = path.relative(SRC_ASSETS_DIR, relativePath);
+  return '.' + path.sep + fin;
 }
 
 
@@ -42,7 +37,7 @@ export function webpackEsmAssets(params) {
     extensionsGlob = `{${extensions.join(',')}}`,
     assetsGlob = `${SRC_ASSETS_DIR}/**/*.${extensionsGlob}`,
     assetFiles = glob.sync(assetsGlob),
-    context = path.resolve(__dirname, SRC_ASSETS_DIR),
+    context = path.join(__dirname, SRC_ASSETS_DIR),
     devtool = false,
     entry = dict(
       assetFiles.map(k => [
@@ -130,17 +125,6 @@ export function webpackEsmAssets(params) {
             }
           ]
         },
-        {
-          test: /\.(c|sa|sc)ss/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader', // translates CSS into CommonJS
-              options: { importLoaders: 1 }
-            },
-            'sass-loader' // compiles Sass to CSS
-          ]
-        }
       ] // rules
     }, // module
     optimization,
@@ -148,9 +132,6 @@ export function webpackEsmAssets(params) {
     performance,
     plugins: plugins.concat(
       new EsmWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: `../${DST_ASSETS_DIR}/${outputFilename}.css`
-      })
     ),
     resolve,
     stats

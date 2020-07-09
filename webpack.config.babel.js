@@ -5,9 +5,8 @@ import path from 'path';
 //const toStr = v => JSON.stringify(v, null, 4);
 
 const WEBPACK_CONFIG = {
-  context: path.resolve(__dirname, 'src'),
   entry: {
-    index: './index.es'
+    index: './src/index.es'
   },
   externals: [
     'fs'
