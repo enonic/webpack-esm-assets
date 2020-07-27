@@ -25,6 +25,7 @@ const WEBPACK_CONFIG = {
       		compact: false,
       		minified: false,
       		plugins: [
+            '@babel/plugin-proposal-export-default-from',
       			'@babel/plugin-proposal-object-rest-spread',
       			'@babel/plugin-transform-object-assign',
       			'array-includes'
