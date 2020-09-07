@@ -4,11 +4,11 @@
     "require": "@babel/register"
   },
   "bugs": {
-    "url": "https://github.com/enonic/enonic-npm-modules/issues"
+    "url": "https://github.com/enonic/webpack-esm-assets/issues"
   },
   "contributors": [],
   "dependencies": {
-    "@babel/core": "7.11.1",
+    "@babel/core": "7.11.6",
     "@babel/plugin-proposal-class-properties": "7.10.4",
     "@babel/plugin-proposal-export-default-from": "7.10.4",
     "@babel/plugin-proposal-export-namespace-from": "7.10.4",
@@ -16,32 +16,29 @@
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
     "@babel/plugin-syntax-throw-expressions": "7.10.4",
     "@babel/plugin-transform-object-assign": "7.10.4",
-    "@babel/plugin-transform-runtime": "7.11.0",
-    "@babel/preset-env": "7.11.0",
+    "@babel/plugin-transform-runtime": "7.11.5",
+    "@babel/preset-env": "7.11.5",
     "@babel/preset-react": "7.10.4",
-    "@babel/register": "7.10.5",
-    "@babel/runtime": "7.11.1",
-    "@purtuga/esm-webpack-plugin": "1.2.1",
+    "@babel/register": "7.11.5",
+    "@babel/runtime": "7.11.2",
+    "@purtuga/esm-webpack-plugin": "1.3.0",
     "babel-loader": "8.1.0",
     "babel-plugin-array-includes": "2.0.3",
-    "css-loader": "4.2.0",
+    "css-loader": "4.2.2",
     "glob": "7.1.6",
-    "mini-css-extract-plugin": "0.9.0",
+    "mini-css-extract-plugin": "0.11.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "sass-loader": "9.0.2",
+    "sass-loader": "10.0.2",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12"
   },
   "description": "Function to webpack client-side ecmascript modules",
   "devDependencies": {
-    "ava": "3.11.1",
-    "eslint": "7.6.0",
-    "eslint-config-airbnb-base": "14.2.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-import": "2.22.0",
-    "eslint-plugin-prettier": "3.1.4",
-    "prettier": "2.0.5"
+    "ava": "3.12.1",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.8.1",
+    "eslint-plugin-import": "2.22.0"
   },
   "files": [
     "dist"
@@ -54,11 +51,11 @@
   "license": "ISC",
   "main": "dist/index.js",
   "name": "@enonic/webpack-esm-assets",
-  "repository": "https://github.com/enonic/enonic-npm-modules/packages/webpack-esm-assets",
+  "repository": "https://github.com/enonic/webpack-esm-assets",
   "scripts": {
-    "prepack": "npm run webpack",
+    "prepack": "yarn run webpack",
     "test": "ava",
     "webpack": "webpack"
   },
-  "version": "0.6.1"
+  "version": "0.7.0"
 }
