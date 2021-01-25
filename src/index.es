@@ -93,6 +93,11 @@ export function webpackEsmAssets(params) {
 			rules: [
 				{
 					test: /\.(es6?|m?jsx?)$/, // Will need js for node module depenencies
+					exclude: [
+						/\bcore-js\b/,
+						/\bwebpack\b/,
+						/\bregenerator-runtime\b/,
+					],
 					use: [
 						{
 							loader: 'babel-loader',
@@ -118,7 +123,22 @@ export function webpackEsmAssets(params) {
 									[
 										'@babel/preset-env',
 										{
-											useBuiltIns: false // false means polyfill not required runtime
+											corejs: 3, // Needed when useBuiltIns: usage
+
+											// Enables all transformation plugins and as a result,
+											// your code is fully compiled to ES5
+											forceAllTransforms: true,
+
+											targets: {
+												esmodules: false, // Enonic XP doesn't support ECMAScript Modules
+
+												// https://node.green/
+												node: '0.10.48'
+											},
+
+											//useBuiltIns: false // no polyfills are added automatically
+											//useBuiltIns: 'entry' // replaces direct imports of core-js to imports of only the specific modules required for a target environment
+											useBuiltIns: 'usage' // polyfills will be added automatically when the usage of some feature is unsupported in target environment
 										}
 									],
 									'@babel/preset-react'
