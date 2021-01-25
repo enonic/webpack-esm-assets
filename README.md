@@ -38,3 +38,10 @@ Into:
 ```
 ./build/resources/main/assets/**/*.esm.js
 ```
+
+## Changelog
+
+### 0.8.0
+
+* Downgrade buildsystem to Node 12.20.1 since we're stuck on webpack 4
+* Upgrade node modules (patch, minor)
