@@ -75,7 +75,6 @@ export function webpackEsmAssets(params) {
 		stats = {
 			colors: true,
 			hash: false,
-			maxModules: 0,
 			modules: false,
 			moduleTrace: false,
 			timings: false,

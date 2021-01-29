@@ -41,6 +41,10 @@ Into:
 
 ## Changelog
 
+### 0.10.0
+
+* maxModules removed in webpack 5
+
 ### 0.9.0
 
 * Exclude core-js, regenerator-runtime and webpack from transpiling
