@@ -41,6 +41,11 @@ Into:
 
 ## Changelog
 
+### 0.11.0
+
+* eslint 7.19.0
+* mini-css-extract-plugin 1.3.5
+
 ### 0.10.0
 
 * maxModules removed in webpack 5
